@@ -20,8 +20,9 @@ public class AddOrderSteps {
     @Given("^I have launched the Orders Application$")
     public void i_have_launched_the_Orders_Application() throws Throwable {
         Driver driver = new LocalDriver();
+//        orders = new WebOrdersAppModel(driver.getApplications().runBrowser(BrowserType.Firefox));
         orders = new WebOrdersAppModel(driver.getApplications().runBrowser(BrowserType.Firefox,
-                "http://secure.smartbearsoftware.com/samples/testcomplete11/WebOrders/login.aspx"));
+                        "http://secure.smartbearsoftware.com/samples/testcomplete11/WebOrders/login.aspx"));
     }
 
     @Given("^I have logged in successfully using user name \"(.*?)\" and password \"(.*?)\"$")

@@ -1,5 +1,7 @@
 package WebOrders;
 
+
+
 import com.smartbear.testleft.HttpException;
 import com.smartbear.testleft.InvocationException;
 import com.smartbear.testleft.ObjectTreeNodeNotFoundException;
@@ -260,24 +262,27 @@ class WebOrdersAppModel {
     public WebOrdersAppModel(WebBrowser browser) {
         this.browser = browser;
     }
+    public String baseUrl = "http://secure.smartbearsoftware.com";
 
+    public String loginPageUrl = baseUrl.concat("/samples/testcomplete11/WebOrders/login.aspx");
+    public String processPageUrl = baseUrl.concat("/samples/testcomplete11/WebOrders/Process.aspx");
 	/**
 	 * The page 'Web Orders Login' with the address http://secure.smartbearsoftware.com/samples/testcomplete11/WebOrders/login.aspx
+	 * @throws InvocationException 
 	 */
-	public LoginPageModel getLoginPage() throws ObjectTreeNodeNotFoundException, HttpException {
+	public LoginPageModel getLoginPage() throws ObjectTreeNodeNotFoundException, HttpException, InvocationException {
 		return new LoginPageModel(browser.find(WebPage.class, new WebPagePattern(){{
-			URL = "*/WebOrders/login.aspx";
-		}}));
+            URL = "*/WebOrders/login.aspx";
+            Visible = true;
+        }}));
 	}
 
     /**
      * The page 'New Order' with the address http://secure.smartbearsoftware.com/samples/TestComplete11/WebOrders/Process.aspx
+     * @throws InvocationException 
      */
-    public NewOrderPageModel getNewOrderPage() throws ObjectTreeNodeNotFoundException, HttpException {
-        return new NewOrderPageModel(browser.find(WebPage.class, new WebPagePattern() {{
-            URL = "*/WebOrders/Process.aspx";
-            Visible = true;
-        }}));
+    public NewOrderPageModel getNewOrderPage() throws ObjectTreeNodeNotFoundException, HttpException, InvocationException {
+        return new NewOrderPageModel(browser.toUrl(processPageUrl));
     }
 
     /**
@@ -367,7 +372,7 @@ class Browser {
      */
     public PageWebOrdersLogin getPageWebOrdersLogin() throws ObjectTreeNodeNotFoundException, HttpException {
         return new PageWebOrdersLogin((WebPage) browser.find(WebPage.class, new WebPagePattern(){{
-            URL = "http://secure.smartbearsoftware.com/samples/TestComplete11/WebOrders/Login.aspx*";
+            URL = "http://secure.smartbearsoftware.com/samples/TestComplete11/WebOrders/Login.aspx";
         }}));
     }
 
